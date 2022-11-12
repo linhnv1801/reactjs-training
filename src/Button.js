@@ -2,7 +2,9 @@ import React from 'react'
 import PropTypes from "prop-types";
 
 class Button extends React.Component {
-
+  constructor(props) {
+    super(props); // bắt buộc phải có dòng này để gọi hàm khởi tạo của class cha 
+  }
  render (){
   return(
     <div>
