@@ -1,7 +1,7 @@
-import React from 'react'
-import Product from './Product'
+import React from 'react';
+import Product from './Product';
 
-function Products({products, rowClick}) {
+function Products({products}) {
   return (
     <div>
         <table>
@@ -16,8 +16,8 @@ function Products({products, rowClick}) {
               </tr>
             </thead>
             <tbody >
-                {products.map((element) => (
-                    <Product key={element.id} product={element} onClick={rowClick}></Product>
+                {products.map((product) => (
+                    <Product key={product.id} Product={product}/>
                 ))}
             </tbody>
         </table>

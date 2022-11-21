@@ -1,20 +1,26 @@
-import React from 'react'
-import Button from './Button'
+import React, { useState } from 'react';
+import Button from './Button';
+import Popup from './Popup';
 
-function Product({product, onClick}) {
+function Product({Product}) {
+
+  const [buttonPopup, ShowPopup] = useState(false);
   return (
       <tr>
-        <td>{product.id}</td>
-        <td>{product.title}</td>
-        <td>{product.price}</td>
-        <td>{product.stock}</td>
-        <td>{product.brand}</td>
+        <td>{Product.id}</td>
+        <td>{Product.title}</td>
+        <td>{Product.price}</td>
+        <td>{Product.stock}</td>
+        <td>{Product.brand}</td>
         <td>
-          <Button  color="red" text="Edit"  onClick={onClick}></Button>
-          <Button color="green" text="Delete"></Button>
+          <Button handle={handleDelete} title="Delete"/>
+          <Button handle={()=> ShowPopup(true)} title="Edit"/>
         </td>
+        <Popup Props={Product} trigger={buttonPopup} Return={ShowPopup}/>
       </tr>
   )
 }
-
-export default Product;
+function handleDelete() {
+  alert("Đã xóa");
+}
+export default Product
