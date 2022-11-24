@@ -1,28 +1,24 @@
-import React from 'react';
-import Product from './Product';
+import React, { useState } from 'react'
+import Button from './Button';
+import Popup from './Popup';
 
-function Products({products}) {
+function Product({Product}) {
+
+  const [buttonPopup, ShowPopup] = useState(false);
   return (
-    <div>
-        <table>
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Title</th>
-                <th>Price</th>
-                <th>Stock</th>
-                <th>Brand</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody >
-                {products.map((product) => (
-                    <Product key={product.id} Product={product}/>
-                ))}
-            </tbody>
-        </table>
-    </div>
+      <tr>
+        <td>{Product.id}</td>
+        <td>{Product.title}</td>
+        <td>{Product.price}</td>
+        <td>{Product.stock}</td>
+        <td>{Product.brand}</td>
+        <td className='actions'>
+          <Button handle={() => {onDelete(Product.id)}} title="Delete"/>
+          <Button handle={()=> ShowPopup(true)} title="Edit"/>
+        </td>
+        <Popup Props={Product} trigger={buttonPopup} setTrigger={setButtonPopup} Return={ShowPopup}/>
+      </tr>
   )
 }
 
-export default Products
+export default Product
