@@ -1,37 +1,35 @@
-import React,{useEffect, useState } from 'react';
-import './App.css';
+import React, { useEffect, useState } from 'react'
+import Button from './Button'
+import DetailsPopup from './DetailsPopup';
 import Products from './Products';
-import {Route, Routes } from 'react-router-dom';
+import "./App.css";
+
+
 function App() {
-  const [products, setProducts] = useState([]);
-  useEffect(() => {
-    const fetchData = async () => {
-      let json = await fetch('http://localhost:5000/products');
-      json = await json.json();
-      setProducts(json);
-    }
-  
-    fetchData()
+     
+  const [products,setProduct]=React.useState([]);
+  useEffect(()=>{
+    const getProducts= async() =>{
+      const data = await fetchProducts();
+      setProduct(data);
+    };
+    getProducts();
   },[])
-  
+
+  const fetchProducts = async()=>{
+    const res = await fetch("http://localhost:5050/products");
+    const data = await res.json();
+      return data;
+      
+  };
+  const[btnPopup, setBtnPopup] = useState(false);
+
   return (
-    <div className="App">
-      <div className='header'>
-        <nav>
-          <ul>
-            <li>
-              <a href='/'>Product</a>
-            </li>
-          </ul>
-        </nav>
-      </div>
-      <div className='content'>
-      <Routes>
-        <Route path="/"element={<Products products={products}/>}/>
-      </Routes>
-      </div>
+    <div className='App'>
+      <Products  products={products} setProduct={setProduct} editClick={()=>setBtnPopup(true)} ></Products>   
     </div>
+  
   );
 }
 
-export default App;
+export default App
